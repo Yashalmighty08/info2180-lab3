@@ -23,6 +23,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
         //Exercise 2 - add X or O on click
         square.addEventListener('click', function(){
+            if(gameOver || state[index] !== null){//Exercise 6 - Disallow Cheating
+                return;
+            }
             state[index] = currentPlayer;
             square.textContent = currentPlayer;
             square.classList.add(currentPlayer);
