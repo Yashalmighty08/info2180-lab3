@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', function(){
     //Game state: one entry per square (null, 'X' or 'O')
     let state = Array(9).fill(null);
     let currentPlayer = 'X';
+
+    //Exercise 4 - Check for the winner and update the status
     let gameOver = false;
 
     const winningCombos = [
@@ -24,6 +26,14 @@ document.addEventListener('DOMContentLoaded', function(){
             state[index] = currentPlayer;
             square.textContent = currentPlayer;
             square.classList.add(currentPlayer);
+
+            //Exercise 4 - Check for the winner and update the status
+            if (checkWinner(currentPlayer)) {
+                statusDiv.textContent = 'Congratulations! ' + currentPlayer + ' is the Winner!';
+                statusDiv.classList.add('you-won');
+                gameOver = true;
+                return;
+            }
             currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
         });
 
@@ -35,5 +45,15 @@ document.addEventListener('DOMContentLoaded', function(){
             square.classList.remove('hover');
         });
     });
+
+    //Exercise 4 - Check for the winner and update the status
+    function checkWinner(player) {
+        return winningCombos.some(function (combo){
+            return combo.every(function (i){
+                return state[i] === player;
+            });
+        });
+    }
+
 
 });
