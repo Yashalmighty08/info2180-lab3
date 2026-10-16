@@ -55,5 +55,18 @@ document.addEventListener('DOMContentLoaded', function(){
         });
     }
 
+    //Exercise 5 - Restart the game
+    newGameBtn.addEventListener('click', function (){
+        state = Array(9).fill(null);
+        currentPlayer = 'X';
+        gameOver = false;
+        squares.forEach(function (square){
+            square.textContent = '';
+            square.classList.remove('X','O', 'hover');
+        });
+        statusDiv.textContent = defaultMessage;
+        statusDiv.classList.remove('you-won');
+    });
+
 
 });
