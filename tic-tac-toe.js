@@ -1,0 +1,39 @@
+//Exercise 1: Layout the board
+document.addEventListener('DOMContentLoaded', function(){
+    const board = document.getElementById('board');
+    const squares = board.querySelectorAll('div');
+    const statusDiv = document.getElementById('status');
+    const newGameBtn = document.querySelector('.btn');
+    const defaultMessage = statusDiv.textContent;
+
+    //Game state: one entry per square (null, 'X' or 'O')
+    let state = Array(9).fill(null);
+    let currentPlayer = 'X';
+    let gameOver = false;
+
+    const winningCombos = [
+        [0,1,2],[3,4,5],[6,7,8],
+        [0,3,6],[1,4,7],[2,5,8],
+        [0,4,8],[2,4,6]];
+    
+    squares.forEach(function (square, index) {
+        square.classList.add('square');
+
+        //Exercise 2 - add X or O on click
+        square.addEventListener('click', function(){
+            state[index] = currentPlayer;
+            square.textContent = currentPlayer;
+            square.classList.add(currentPlayer);
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        });
+
+        //Exercise 3 - Change the style when you move your mouse over a square
+        square.addEventListener('mouseenter', function (){
+            square.classList.add('hover');
+        });
+        square.addEventListener('mouseleave', function (){
+            square.classList.remove('hover');
+        });
+    });
+
+});
